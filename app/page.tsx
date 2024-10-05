@@ -1,101 +1,346 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { TypeAnimation } from "react-type-animation";
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  GithubIcon,
+  LinkedinIcon,
+  MailIcon,
+  DownloadIcon,
+  PhoneIcon,
+} from "lucide-react";
+import Link from "next/link";
+
+export default function EnhancedPortfolio() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white p-8">
+      <div className="max-w-6xl mx-auto space-y-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="md:col-span-2">
+            <Card className="bg-gray-800 border-gray-700">
+              <CardHeader>
+                <CardTitle className="text-4xl font-bold mb-4">
+                  Welcome to My Portfolio
+                </CardTitle>
+                {mounted && (
+                  <TypeAnimation
+                    sequence={[
+                      "I develop MERN stack applications",
+                      1000,
+                      "I solve complex problems with React and Node.js",
+                      1000,
+                      "I create sleek, user-friendly interfaces",
+                      1000,
+                    ]}
+                    wrapper="h2"
+                    speed={50}
+                    className="text-2xl text-blue-400"
+                    repeat={Infinity}
+                  />
+                )}
+              </CardHeader>
+              <CardContent>
+                <p className="mt-4 text-base">
+                  I am a passionate Full Stack Developer with hands-on
+                  experience in the MERN stack, including MongoDB, Express.js,
+                  React.js, and Node.js. My expertise extends to React Native,
+                  Next.js, and a variety of tools such as JWT, Tailwind CSS, and
+                  Socket.io. I thrive in developing dynamic and secure web
+                  applications, and I’m continuously expanding my skill set to
+                  tackle new challenges. With a strong foundation in programming
+                  languages like JavaScript,Typescript, Python, C++, and Java, I
+                  enjoy working on innovative projects and contributing to
+                  open-source communities.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          <div className="space-y-8">
+            <Card className="bg-gray-800 border-gray-700">
+              <CardHeader>
+                <CardTitle className="text-2xl font-bold">
+                  Aditya Karmakar
+                </CardTitle>
+                <p className="text-gray-400">Full Stack Developer</p>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2 mb-4">
+                  <p>
+                    <MailIcon className="inline mr-2" /> adkarmakar521@gmail.com
+                  </p>
+                  <p>
+                    <PhoneIcon className="inline mr-2" /> 6296306334
+                  </p>
+                </div>
+                <div className="flex justify-center space-x-4 mb-4">
+                  <Button variant="outline" size="icon" asChild>
+                    <Link
+                      href="https://github.com/aditya-krm"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <GithubIcon className="h-4 w-4" />
+                    </Link>
+                  </Button>
+                  <Button variant="outline" size="icon" asChild>
+                    <Link
+                      href="https://linkedin.com/in/aditya-karmakar"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <LinkedinIcon className="h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
+                <Button className="w-full" asChild>
+                  <Link
+                    href={`https://drive.google.com/uc?export=download&id=${process.env.NEXT_PUBLIC_RESUME_ID}`}
+                    rel="noopener noreferrer"
+                  >
+                    <DownloadIcon className="mr-2 h-4 w-4" /> Download Resume
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        <Card className="bg-gray-800 border-gray-700">
+          <CardHeader>
+            <CardTitle className="text-3xl font-bold mb-2">About Me</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="mb-4">
+              I'm currently pursuing my B.Tech in Computer Science with hands-on
+              experience in building full-stack applications using the MERN
+              stack. Some of my notable projects include a real-time chat
+              system, a social media platform, and a role-based dashboard.
+            </p>
+            <ul className="list-disc pl-5 space-y-2">
+              <li>Front-end: React, Next.js, TypeScript, Tailwind CSS</li>
+              <li>Back-end: Node.js, Express.js, Python</li>
+              <li>Databases: MongoDB, MySQL</li>
+              <li>Other: JWT, Socket.io, Redux Toolkit</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-gray-800 border-gray-700">
+          <CardHeader>
+            <CardTitle className="text-3xl font-bold mb-2">Projects</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <h3 className="text-xl font-semibold">
+                <Link
+                  href="https://devhub-post.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:underline"
+                >
+                  Devhub - Social Media Platform
+                </Link>
+              </h3>
+              <p className="text-gray-400">Next.js, MongoDB, NextAuth</p>
+              <p>
+                A secure platform for developers to connect and share posts,
+                with robust authentication.
+              </p>
+              <p>
+                <Link
+                  href="https://github.com/aditya-krm/devhub-post"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:underline"
+                >
+                  GitHub Repository
+                </Link>
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold">
+                <Link
+                  href="https://chat-app-0b1m.onrender.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:underline"
+                >
+                  Real-time Chat Application
+                </Link>
+              </h3>
+              <p className="text-gray-400">MERN Stack, Socket.io</p>
+              <p>
+                A live chat system featuring real-time communication and user
+                authentication.
+              </p>
+              <p>
+                <Link
+                  href="https://github.com/aditya-krm/chat-app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:underline"
+                >
+                  GitHub Repository
+                </Link>
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold">
+                <Link
+                  href="https://ai-summarizer-wine-two.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:underline"
+                >
+                  AI Article Summarizer
+                </Link>
+              </h3>
+              <p className="text-gray-400">React, Redux Toolkit, GPT-4</p>
+              <p>
+                A web app that summarizes articles using OpenAI GPT-4, built
+                with React and TypeScript.
+              </p>
+              <p>
+                <Link
+                  href="https://github.com/aditya-krm/ai--summarizer"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:underline"
+                >
+                  GitHub Repository
+                </Link>
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold">
+                <Link
+                  href="https://role-based-dashboard.onrender.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:underline"
+                >
+                  Role-Based Dashboard
+                </Link>
+              </h3>
+              <p className="text-gray-400">Next.js, JWT, MongoDB</p>
+              <p>
+                A role-based dashboard for managing users and their roles, with
+                secure authentication.
+              </p>
+              <p>
+                <Link
+                  href="https://github.com/aditya-krm/role-based-dashboard"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:underline"
+                >
+                  GitHub Repository
+                </Link>
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold">
+                <Link
+                  href="https://small-projects-sigma.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:underline"
+                >
+                  Small Web Applications
+                </Link>
+              </h3>
+              <p className="text-gray-400">React, API Integration</p>
+              <p>
+                Collection of small-scale apps, including a currency converter,
+                weather app, and more.
+              </p>
+              <p>
+                <Link
+                  href="https://github.com/aditya-krm/Small-Projects"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:underline"
+                >
+                  GitHub Repository
+                </Link>
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold">
+                <Link
+                  href="https://www.npmjs.com/package/state-city-dropdown-india"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:underline"
+                >
+                  State-City Dropdown NPM Package
+                </Link>
+              </h3>
+              <p className="text-gray-400">JavaScript, NPM</p>
+              <p>
+                A customizable state-city dropdown component for India,
+                published as an npm package.
+              </p>
+              <p>
+                <Link
+                  href="https://github.com/aditya-krm/state-city-dropdown-india"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:underline"
+                >
+                  GitHub Repository
+                </Link>
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-gray-800 border-gray-700">
+          <CardHeader>
+            <CardTitle className="text-3xl font-bold mb-2">
+              Skills & Technologies
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <h3 className="text-xl font-semibold mb-2">Languages</h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>JavaScript (ES6+)</li>
+                  <li>TypeScript</li>
+                  <li>Python</li>
+                  <li>C++, Java</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold mb-2">
+                  Frameworks & Tools
+                </h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>React & Next.js</li>
+                  <li>Node.js & Express</li>
+                  <li>Tailwind CSS & Bootstrap</li>
+                  <li>Socket.io, JWT</li>
+                </ul>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
