@@ -1,8 +1,9 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import Loading from "@/components/customs/Loading";
 
 interface BlogPost {
   _id: string;
@@ -20,15 +21,15 @@ export default function Blogs() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await fetch('/api/blog');
+        const response = await fetch("/api/blog");
         if (!response.ok) {
-          throw new Error('Failed to fetch blogs');
+          throw new Error("Failed to fetch blogs");
         }
         const data = await response.json();
         setBlogPosts(data);
       } catch (err) {
-        setError('Error fetching blogs. Please try again later.');
-        console.error('Error fetching blogs:', err);
+        setError("Error fetching blogs. Please try again later.");
+        console.error("Error fetching blogs:", err);
       } finally {
         setIsLoading(false);
       }
@@ -37,7 +38,7 @@ export default function Blogs() {
     fetchBlogs();
   }, []);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading />;
   if (error) return <div>{error}</div>;
 
   return (
@@ -45,7 +46,10 @@ export default function Blogs() {
       <h1 className="text-3xl font-bold mb-8">Latest Blog Posts</h1>
       <div className="space-y-12">
         {blogPosts.map((post) => (
-          <article key={post._id} className="border-b border-gray-200 pb-8 last:border-b-0">
+          <article
+            key={post._id}
+            className="border-b border-gray-200 pb-8 last:border-b-0"
+          >
             <h2 className="text-2xl font-semibold mb-2">
               <Link href={`/blogs/${post.slug}`} className="hover:underline">
                 {post.title}

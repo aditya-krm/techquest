@@ -126,10 +126,22 @@ export default function EnhancedPortfolio() {
               system, a social media platform, and a role-based dashboard.
             </p>
             <ul className="list-disc pl-5 space-y-2">
-              <li>Front-end: React, Next.js, TypeScript, Tailwind CSS</li>
-              <li>Back-end: Node.js, Express.js, Python</li>
-              <li>Databases: MongoDB, MySQL</li>
-              <li>Other: JWT, Socket.io, Redux Toolkit</li>
+              <li>
+                <span className="font-bold">Front-end:</span>{" "}
+                <span>React, Next.js, TypeScript, Tailwind CSS</span>
+              </li>
+              <li>
+                <span className="font-bold">Back-end:</span>{" "}
+                <span>Node.js, Express.js, Python</span>
+              </li>
+              <li>
+                <span className="font-bold">Databases:</span>{" "}
+                <span>MongoDB, MySQL</span>
+              </li>
+              <li>
+                <span className="font-bold">Other:</span>{" "}
+                <span>JWT, Socket.io, Redux Toolkit</span>
+              </li>
             </ul>
           </CardContent>
         </Card>

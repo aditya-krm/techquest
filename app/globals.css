@@ -76,6 +76,9 @@ body {
 }
 
 /* my custom css*/
+/* My custom CSS */
+
+/* Link styles */
 .prose a {
   color: #0366d6;
   text-decoration: none;
@@ -85,6 +88,101 @@ body {
   text-decoration: underline;
 }
 
+/* Headings */
+.prose h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #2a3a4a;
+  padding-bottom: 0.5rem;
+}
+
+.prose h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid #2a3a4a;
+  padding-bottom: 0.5rem;
+}
+
+.prose h3 {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+}
+
+.prose h4 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.prose h5 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.prose h6 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+/* Paragraphs */
+.prose p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+/* Blockquote styles */
+.prose blockquote {
+  border-left: 4px solid #2a3a4a;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: #6a737d;
+  background-color: #f6f8fa;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+/* Code block styles */
+.prose pre {
+  background: #2a3a4a;
+  border-radius: 6px;
+  padding: 1rem;
+  overflow: auto;
+  white-space: pre-wrap;
+  color: #fff;
+}
+
+.prose code {
+  background: #2a3a4a;
+  border-radius: 3px;
+  padding: 0.2rem 0.4rem;
+  color: #fff;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Lists */
+.prose ul,
+.prose ol {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+}
+
+/* Horizontal rule */
+.prose hr {
+  border: 1px solid #2a3a4a;
+  margin: 1.5rem 0;
+}
+
+/* Tables */
 .prose table {
   border-collapse: collapse;
   width: 100%;
@@ -101,59 +199,28 @@ body {
 .prose th {
   background-color: #2a3a4a;
   font-weight: bold;
+  color: #fff;
 }
 
+/* Image styling */
 .prose img {
   border: 1px solid #2a3a4a;
   border-radius: 4px;
+  margin-bottom: 1rem;
 }
 
-/* Blockquote styles */
-.prose blockquote {
-  border-left: 4px solid #2a3a4a;
-  padding-left: 1rem;
-  margin: 1.5rem 0;
-  font-style: italic;
-  color: #6a737d;
-}
-
-/* Code block styles */
-.prose pre {
-  background: #2a3a4a;
-  border-radius: 6px; 
-  padding: 1rem;
-  overflow: auto;
-  white-space: pre-wrap;
-}
-
-/* Code inline styles */
-.prose code {
-  background: #2a3a4a;
-  border-radius: 3px;
-  padding: 0.2rem 0.4rem;
-  font-family: 'Courier New', Courier, monospace;
-}
-
-/* Lists */
-.prose ul,
-.prose ol {
-  padding-left: 1.5rem;
-  margin: 1rem 0;
-}
-
-.prose li {
-  margin-bottom: 0.5rem;
-}
-
-.prose hr {
-  border: 1px solid #2a3a4a;
-  margin: 1.5rem 0;
-}
-
+/* Bold and Italics */
 .prose strong {
   font-weight: bold;
 }
 
 .prose em {
   font-style: italic;
+}
+
+/* Additional styling for strong emphasis */
+.prose strong em {
+  font-weight: bold;
+  font-style: italic;
+  color: #2a3a4a;
 }

@@ -1,10 +1,11 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
-import { marked } from 'marked';
-import Link from 'next/link';
-import { ArrowLeft, Calendar } from 'lucide-react';
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { marked } from "marked";
+import Link from "next/link";
+import { ArrowLeft, Calendar } from "lucide-react";
+import Loading from "@/components/customs/Loading";
 
 interface BlogPost {
   _id: string;
@@ -27,13 +28,13 @@ export default function BlogPost() {
       try {
         const response = await fetch(`/api/blog/${slug}`);
         if (!response.ok) {
-          throw new Error('Failed to fetch blog post');
+          throw new Error("Failed to fetch blog post");
         }
         const data = await response.json();
         setBlog(data);
       } catch (err) {
-        setError('Error fetching blog post. Please try again later.');
-        console.error('Error fetching blog post:', err);
+        setError("Error fetching blog post. Please try again later.");
+        console.error("Error fetching blog post:", err);
       } finally {
         setIsLoading(false);
       }
@@ -42,32 +43,33 @@ export default function BlogPost() {
     fetchBlog();
   }, [slug]);
 
-  if (isLoading) return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-900"></div>
-    </div>
-  );
+  if (isLoading) return <Loading />;
 
-  if (error) return (
-    <div className="container mx-auto px-4 py-8 text-center">
-      <h1 className="text-2xl font-bold text-red-600 mb-4">Error</h1>
-      <p>{error}</p>
-      <Link href="/blogs" className="text-blue-500 hover:underline mt-4 inline-block">
-        <ArrowLeft className="inline mr-2" />
-        Back to all blogs
-      </Link>
-    </div>
-  );
+  if (error)
+    return (
+      <div className="container mx-auto px-4 py-8 text-center">
+        <h1 className="text-2xl font-bold text-red-600 mb-4">Error</h1>
+        <p>{error}</p>
+        <Link
+          href="/blogs"
+          className="text-blue-500 hover:underline mt-4 inline-block"
+        >
+          <ArrowLeft className="inline mr-2" />
+          Back to all blogs
+        </Link>
+      </div>
+    );
 
-  if (!blog) return (
-    <div className="container mx-auto px-4 py-8 text-center">
-      <h1 className="text-2xl font-bold mb-4">Blog post not found</h1>
-      <Link href="/blogs" className="text-blue-500 hover:underline">
-        <ArrowLeft className="inline mr-2" />
-        Back to all blogs
-      </Link>
-    </div>
-  );
+  if (!blog)
+    return (
+      <div className="container mx-auto px-4 py-8 text-center">
+        <h1 className="text-2xl font-bold mb-4">Blog post not found</h1>
+        <Link href="/blogs" className="text-blue-500 hover:underline">
+          <ArrowLeft className="inline mr-2" />
+          Back to all blogs
+        </Link>
+      </div>
+    );
 
   const getMarkdownContent = (markdown: string) => {
     return { __html: marked(markdown) };
@@ -75,7 +77,10 @@ export default function BlogPost() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-3xl">
-      <Link href="/blogs" className="text-blue-500 hover:underline mb-6 inline-block">
+      <Link
+        href="/blogs"
+        className="text-blue-500 hover:underline mb-6 inline-block"
+      >
         <ArrowLeft className="inline mr-2" />
         Back to all blogs
       </Link>
@@ -88,9 +93,9 @@ export default function BlogPost() {
               {new Date(blog.createdAt).toLocaleDateString()}
             </span>
           </div>
-          <div 
+          <div
             className="prose max-w-none"
-            dangerouslySetInnerHTML={getMarkdownContent(blog.content)} 
+            dangerouslySetInnerHTML={getMarkdownContent(blog.content)}
           />
         </div>
       </article>
