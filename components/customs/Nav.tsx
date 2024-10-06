@@ -1,23 +1,21 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Github, Menu } from "lucide-react"
+import * as React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Github, Menu } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const routes = [
-    { href: "/", label: "Home" },
-    { href: "/blogs", label: "Blogs" },
-    { href: "/quizzes", label: "Quizzes" },
-    { href: "/interview", label: "Interview Preparation" },
-]
+  { href: "/", label: "Home" },
+  { href: "/blogs", label: "Blogs" },
+];
 
 export default function Navbar() {
-  const pathname = usePathname()
-  const [isOpen, setIsOpen] = React.useState(false)
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -28,7 +26,11 @@ export default function Navbar() {
               <Link
                 key={route.href}
                 href={route.href}
-                className={`transition-colors hover:text-foreground/80 ${pathname === route.href ? "text-foreground" : "text-foreground/60"}`}
+                className={`transition-colors hover:text-foreground/80 ${
+                  pathname === route.href
+                    ? "text-foreground"
+                    : "text-foreground/60"
+                }`}
               >
                 {route.label}
               </Link>
@@ -51,7 +53,11 @@ export default function Navbar() {
                 <Link
                   key={route.href}
                   href={route.href}
-                  className={`block px-2 py-1 text-lg ${pathname === route.href ? "text-foreground" : "text-foreground/60"}`}
+                  className={`block px-2 py-1 text-lg ${
+                    pathname === route.href
+                      ? "text-foreground"
+                      : "text-foreground/60"
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {route.label}
@@ -63,7 +69,11 @@ export default function Navbar() {
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <div className="w-full flex-1 md:w-auto md:flex-none">
             <Button asChild className="ml-auto" variant="outline">
-              <Link href="https://github.com/aditya-krm" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://github.com/aditya-krm"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Github className="mr-2 h-4 w-4" />
                 GitHub
               </Link>
@@ -72,5 +82,5 @@ export default function Navbar() {
         </div>
       </div>
     </header>
-  )
+  );
 }

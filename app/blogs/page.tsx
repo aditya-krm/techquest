@@ -3,7 +3,9 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Loading from "@/components/customs/Loading";
+import { motion } from "framer-motion";
 
 interface BlogPost {
   _id: string;
@@ -38,43 +40,91 @@ export default function Blogs() {
     fetchBlogs();
   }, []);
 
+  const fadeInUp = {
+    initial: { opacity: 0, y: 60 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
+  const stagger = {
+    animate: {
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
   if (isLoading) return <Loading />;
-  if (error) return <div>{error}</div>;
+  if (error)
+    return <div className="text-center text-red-500 mt-8">{error}</div>;
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Latest Blog Posts</h1>
-      <div className="space-y-12">
-        {blogPosts.map((post) => (
-          <article
-            key={post._id}
-            className="border-b border-gray-200 pb-8 last:border-b-0"
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-800 text-white p-8">
+      <motion.div
+        className="container mx-auto px-4 py-8"
+        initial="initial"
+        animate="animate"
+        variants={stagger}
+      >
+        <motion.h1
+          className="text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600"
+          variants={fadeInUp}
+        >
+          Latest Blog Posts
+        </motion.h1>
+        <motion.div className="space-y-8" variants={stagger}>
+          {blogPosts.map((post) => (
+            <motion.div key={post._id} variants={fadeInUp}>
+              <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm hover:bg-gray-700/50 transition-all duration-300">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-semibold">
+                    <Link
+                      href={`/blogs/${post.slug}`}
+                      className="hover:text-blue-400 transition-colors duration-200"
+                    >
+                      {post.title}
+                    </Link>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-300 mb-4">{post.excerpt}</p>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-400">
+                      {new Date(post.createdAt).toLocaleDateString()}
+                    </span>
+                    <Button
+                      variant="outline"
+                      className="text-blue-400 border-blue-400 hover:bg-blue-400 hover:text-white transition-colors duration-200"
+                      asChild
+                    >
+                      <Link href={`/blogs/${post.slug}`}>Read more</Link>
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {blogPosts.length === 0 && (
+          <motion.p
+            className="text-center text-gray-400 mt-8"
+            variants={fadeInUp}
           >
-            <h2 className="text-2xl font-semibold mb-2">
-              <Link href={`/blogs/${post.slug}`} className="hover:underline">
-                {post.title}
-              </Link>
-            </h2>
-            <p className="text-muted-foreground mb-4">{post.excerpt}</p>
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-muted-foreground">
-                {new Date(post.createdAt).toLocaleDateString()}
-              </span>
-              <Button variant="link" asChild>
-                <Link href={`/blogs/${post.slug}`}>Read more</Link>
-              </Button>
-            </div>
-          </article>
-        ))}
-      </div>
+            No blog posts found.
+          </motion.p>
+        )}
 
-      {blogPosts.length === 0 && <p>No blog posts found.</p>}
-
-      {blogPosts.length > 0 && (
-        <div className="mt-12 flex justify-center">
-          <Button variant="outline">Load More Posts</Button>
-        </div>
-      )}
+        {/* {blogPosts.length > 0 && (
+          <motion.div className="mt-12 flex justify-center" variants={fadeInUp}>
+            <Button
+              variant="outline"
+              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-none"
+            >
+              Load More Posts
+            </Button>
+          </motion.div>
+        )} */}
+      </motion.div>
     </div>
   );
 }
